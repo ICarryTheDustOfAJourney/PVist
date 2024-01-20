@@ -27,7 +27,7 @@ PVist ist
 	WB-Firmware 55.5 oder später in der go-e Handy-App unter “Internet” -> “Firmwareversion”
 
 ## Installation
-Passende Datei herunter laden & in ein beliebiges Verzeichnis entpacken
+Passende [Datei herunter laden](https://github.com/ICarryTheDustOfAJourney/PVist/tree/main/Downloads) & in ein beliebiges Verzeichnis entpacken
 - Windows 10 & 11: 	PVist-win32-x64-[versionsnummer].7z
 - Mac Intel:	PVist-darwin-x64-[versionsnummer].7z
 - Mac Apple Silicon:	PVist-darwin-arm64-[versionsnummer].7z

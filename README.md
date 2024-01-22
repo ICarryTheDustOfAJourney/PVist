@@ -73,16 +73,14 @@ Wird das Hauptfenster geschlossen, dann wird auch der Server beendet.
 
 - wenn die Funktion "CSV-Datei abspeichern" aktiviert wird, erzeugt das Programm für jeden Tag eine separate CSV-Datei, in der die angezeigten Werte abgelegt werden. Die CSV-Dateien werden auf dem PC abgelegt, auf dem PVist läuft (“Server”) unter
 
--	Windows
+	- Windows:<br/>
 	Windows-Verzeichnis für temporäre Dateien, das den symbolischen Namen "%temp%" hat (im Dateiexplorer eingegeben)
--	Mac
+	- Mac:<br/>
 	Dokumentenordner
 
-Die Dateien können z.B. mit Excel, Calc, oder Numbers weiter verarbeitet werden.
-
-Wenn die aktuelle Datei gesperrt wird (z.B. durch eine Tabellenkalkulation), kann PVist keine weiteren Daten hinzufügen.
-
-Diese Dateien werden von PVist nicht gelöscht.
+	Die Dateien können z.B. mit Excel, Calc, oder Numbers weiter verarbeitet werden.
+	Wenn die aktuelle Datei gesperrt wird (z.B. durch eine Tabellenkalkulation), kann PVist keine weiteren Daten hinzufügen.
+	Diese Dateien werden von PVist nicht gelöscht.
 
 Enjoy!
 ## Anmerkungen

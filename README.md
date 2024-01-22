@@ -3,7 +3,7 @@ Photovoltaik ist-Werte anzeigen für [S10 PV-Anlagen](https://www.e3dc.com/) der
 Optional mit einer [go-e Wallbox](https://go-e.com/) und [PV-Überschussladen](https://www.google.com/search?q=pv+%C3%BCberschussladen).
 
 PVist ist
-- eine [portable Anwendung](https://de.wikipedia.org/wiki/Portable_Software) für Windows 10 & 11 und macOS, die ohne einen dedizierten Server auskommt.
+- eine [portable Anwendung](https://de.wikipedia.org/wiki/Portable_Software) für Windows 10 & 11 und macOS, die ohne einen dedizierten Server auskommt
 - ein nicht-kommerzielles Freizeitprojekt, Einsatz auf eigene Gefahr
 
 ## Voraussetzungen für den Betrieb
@@ -27,7 +27,7 @@ PVist ist
 	WB-Firmware 55.5 oder später in der go-e Handy-App unter “Internet” -> “Firmwareversion”
 
 ## Installation
-Passende [Datei herunter laden](https://github.com/ICarryTheDustOfAJourney/PVist/tree/main/Downloads) & in ein beliebiges Verzeichnis entpacken
+Passende [Datei herunter laden](https://drive.google.com/drive/folders/1oy1mYJ1L3km5SP5DC9LIV0oxdpZBdO23) & in ein beliebiges Verzeichnis entpacken:
 - Windows 10 & 11: 	PVist-win32-x64-[versionsnummer].7z
 - Mac Intel:	PVist-darwin-x64-[versionsnummer].7z
 - Mac Apple Silicon:	PVist-darwin-arm64-[versionsnummer].7z
@@ -36,11 +36,11 @@ Passende [Datei herunter laden](https://github.com/ICarryTheDustOfAJourney/PVist
 PVist ist portabel, dh. es braucht keine eigentliche Installation und kann von einem beliebigen Verzeichnis sofort ausgeführt werden.
 
 -	PVist.exe starten<br/>
-	Beim ersten Start erscheint der Dialog "Windows-Sicherheitshinweis":<br/>
+	Beim ersten Start erscheint ein Windows-Dialog mit dem "Windows-Sicherheitshinweis" für die Firewall-Freigabe:<br/>
 	Falls PVist auch im Netzwerk z.B. von Handy, Tablets odere anderen PCs verwendet werden soll:<br/>
 	Haken bei "Private Netzwerke" setzen, dann "Zugriff zulassen" setzen (erfordert Admin-Rechte)
 
-	PVist läuft lokal auch ohne Freigabe durch die Firewall.
+	PVist läuft auch ohne Freigabe durch die Firewall, dann allerdings lokal ohne Zugriffsmöglichkeit auf seine Webseite aus dem Netzwerk.
 
 ### Mac
 - PVist starten
@@ -156,5 +156,19 @@ Hinweise auf etwaige Schwachstellen nimmt der Autor gerne an.
 - ggf. Firewall zurücksetzen
 
 ## FAQ
-1.	Warum .7z?<br/>
-	Weil Github eine magische Grenze für Dateien über 100MB hat, die .zip überschreiten würde
+1.	Warum sind die Dateien bei Google Drive gehostet?<br/>
+	- weil unbezahltes Github eine magische Grenze für Dateien über 100MB hat
+	- weil es wenig Sinn hat, so große .zip-Dateien zu versionieren
+
+1.	Warum sind hier keine Sourcen?<br/>
+	Weil ich derzeit keine Zeit habe, sie öffentlich zu pflegen. Vielleicht wird sich das zu einem späteren Zeitpunkt noch ändern.<br/>
+ 	Außerdem kann man hier das Projekt gut verwalten (Issues, Readme etc)
+  	
+1.	Ist das Malware?<br/>
+	Nein, ich verwende es selbst auch 😉. Es wäre auch eine komische Idee, Malware in JavaScript/Electron zu schreiben.
+
+1.	Warum hast Du das geschrieben?<br/>
+	- weil ich die Grafiken von E3DCs Webeite zu schlecht aufgelöst und zu sehr geglättet fand
+	- weil ich Überschussladen wollte ohne neue Server zu installieren
+ 	- weil ich den tatsächlichen COP meiner Wärmepumpe ermitteln wollte
+	- weil ich schon immer mal die Idee ausprobieren wollte, einen Server in Electron zu schreiben

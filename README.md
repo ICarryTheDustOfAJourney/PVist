@@ -5,6 +5,28 @@ Optional mit einer [go-e Wallbox](https://go-e.com/) und [PV-Überschussladen](h
 PVist ist
 - eine [portable Anwendung](https://de.wikipedia.org/wiki/Portable_Software) für Windows 10 & 11 und macOS, die ohne einen dedizierten Server auskommt
 - ein nicht-kommerzielles Freizeitprojekt, Einsatz auf eigene Gefahr
+- leicht zu installieren
+
+## Display
+PVist erzeugt diese Grafik sowohl in der App als auch via Netzwerk in Browsern:
+![Liniengrafik](./Images/ScreenshotA.png "Screenshot A")
+
+Numerische Werte oben:<br/>
+Aktuelle Leistungsdaten, darunter kleiner die Durchschnittswerte am Anfang und am Ende des dargestellten Zeitraums über 20 Messwerte (optional, einstellbar)
+
+Liniengrafik darunter:
+- Gelb: PV Leistung
+- Weiß: Hausverbrauch
+- Grün: Leistung und Zustand der PV-Batterie, positiv = laden, negativ = entladen
+- Rot: Leistung des externen Netzes 
+- Blau: Leistung der Wallbox. Energie der letzten Ladung, umgerechnet in Kilometer (einstellbar)
+
+Die weiß-roten Trapeze werden durch eine taktende Wärmepumpe verursacht. Anlaufleistung der WP bis knapp 10kW. Um 10:10 kommt eine Waschmaschine dazu. 
+Die WB (blau) versucht, dem PV-Überschuss zu folgen.
+
+Da die Batterie (grün) nur bis 20% entladen werden darf (konfigurierte Reserve), muss zeitweise das EVU (rot) einspringen. 
+Überschüssige Leistung fliesst in die Batterie, da die WB-Überschussladung eine größere Totzeit hat.
+An einem Januarmorgen reicht die PV-Leistung noch nicht aus, um den Bedarf zu decken.
 
 ## Voraussetzungen für den Betrieb
 
@@ -63,6 +85,7 @@ Wird das Hauptfenster geschlossen, dann wird auch der Server beendet.
 - belegt keine Ressourcen, wenn es beendet ist
 - installiert keine Dienste, modifiziert nicht die Registry 
 - telefoniert nicht nach Hause
+- zeigt keine Werbung an
 - braucht keinerlei externen Ressourcen, auch nicht die von E3DC oder go-e
 -	wer zusätzlich eine go-e Wallbox mit aktiviertem lokalen API V2 hat, kann unter den Einstellungen deren URL eingeben.
 	Beispiele:
@@ -143,6 +166,8 @@ Es spricht aber nichts dagegen, es auch von unterwegs aus über ein VPN zu verwe
 
 Hinweise auf etwaige Schwachstellen nimmt der Autor gerne an.
 
+Das Programm nimmt keinerlei Einstellungen an der S10 vor, lediglich die Wallbox wird mit Werten und Parametern versorgt.
+
 
 ## De-Installation (???)
 ### Windows
@@ -165,8 +190,9 @@ Hinweise auf etwaige Schwachstellen nimmt der Autor gerne an.
 1.	Ist das Malware?<br/>
 	Nein, ich verwende es selbst auch 😉. Es wäre auch eine komische Idee, Malware in JavaScript/Electron zu schreiben.
 
-1.	Warum hast Du das geschrieben?<br/>
+1.	Warum hast Du PVist geschrieben?<br/>
 	- weil ich die Grafiken von E3DCs Webeite zu schlecht aufgelöst und zu sehr geglättet fand
 	- weil ich Überschussladen wollte ohne neue Server zu installieren
  	- weil ich den tatsächlichen COP meiner Wärmepumpe ermitteln wollte
 	- weil ich schon immer mal die Idee ausprobieren wollte, einen Server in Electron zu schreiben
+	- weil ich meine Daten nicht von fremden Servern abfragen will ("Digitale Souveränität")

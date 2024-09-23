@@ -1,20 +1,23 @@
 # PVist
 Photovoltaik ist-Werte anzeigen für [S10 PV-Anlagen](https://www.e3dc.com/) der Firma E3DC.<br/>
-Optional mit einer [go-e Wallbox](https://go-e.com/) und [PV-Überschussladen](https://www.google.com/search?q=pv+%C3%BCberschussladen).
+Optional mit einer [go-e Charger Gemini Wallbox](https://go-e.com/) und [PV-Überschussladen](https://www.google.com/search?q=pv+%C3%BCberschussladen).
 
 PVist ist
 - eine [portable Anwendung](https://de.wikipedia.org/wiki/Portable_Software) für Windows 10 & 11 und macOS, die ohne einen dedizierten Server auskommt
 - ein nicht-kommerzielles Freizeitprojekt, Einsatz auf eigene Gefahr
 - leicht zu installieren
+- auch als reine Serverversion ohne Electron verfügbar
+- kein Ersatz für die go-e App, sondern eine Ergänzung zur PV-Überschussladung
+- für die Verwendung mit Handys oder Tablets geeignet
 
 ## Display
 PVist erzeugt diese Grafik sowohl in der App als auch via Netzwerk in Browsern:
 ![Liniengrafik](./Images/ScreenshotA.png "Screenshot A")
 
-Numerische Werte oben:<br/>
+Die numerischen Werte werden oben dargestellt:<br/>
 Aktuelle Leistungsdaten, darunter kleiner die Durchschnittswerte am Anfang und am Ende des dargestellten Zeitraums über 20 Messwerte (optional, einstellbar)
 
-Liniengrafik darunter:
+Die Liniengrafik darunter:
 - Gelb: PV Leistung
 - Weiß: Hausverbrauch
 - Grün: Leistung und Zustand der PV-Batterie, positiv = laden, negativ = entladen
@@ -27,10 +30,13 @@ Die WB (blau) versucht, dem PV-Überschuss zu folgen.
 Da die Batterie (grün) nur bis 20% entladen werden darf (konfigurierte Reserve), muss zeitweise das EVU (rot) einspringen. 
 Überschüssige Leistung fliesst in die Batterie, da die WB-Überschussladung eine größere Totzeit hat.
 An einem Januarmorgen reicht die PV-Leistung noch nicht aus, um den Bedarf zu decken.
+Bis zu 4096 Messwerte in beliebigen Intervallen von 1 bis 60 Sekunden werden dargestellt.
 
 ## Voraussetzungen für den Betrieb
 
 - Windows 10, 11 oder aktuelles macOS, Intel oder Apple Silicon CPU
+- für die Serverversion Linux, Windows, MacOS oder andere OSe, sofern ein NodeJS und `npm` installiert sind. Weitere Details im Redame der .zip-Datei.
+  Die Serverversion kommt ohne Electron, ist praktisch wartungsfrei und kann 24/7 laufen
 - der Modbus der S10 muss aktiviert sein:
   Hauptmenü -> Smart-Funktionen-> Smart Home 2x aktivieren
   Eintrag muss grün unterlegt sein, Port 502 wie voreingestellt verwenden
@@ -50,9 +56,15 @@ An einem Januarmorgen reicht die PV-Leistung noch nicht aus, um den Bedarf zu de
 
 ## Installation
 Passende [Datei herunter laden](https://drive.google.com/drive/folders/1oy1mYJ1L3km5SP5DC9LIV0oxdpZBdO23) & in ein beliebiges Verzeichnis entpacken:
-- Windows 10 & 11: 	PVist-win32-x64-[versionsnummer].7z
-- Mac Intel:	PVist-darwin-x64-[versionsnummer].7z
-- Mac Apple Silicon:	PVist-darwin-arm64-[versionsnummer].7z
+- Windows 10 & 11: PVist-win32-x64-[versionsnummer].7z
+- Mac Intel: PVist-darwin-x64-[versionsnummer].7z
+- Mac Apple Silicon: PVist-darwin-arm64-[versionsnummer].7z
+- Serverversion: PVIST-Server-[versionsnummer].7z
+
+Im Download-Verzeichnis befindet sich immer die aktuellste Version mit dem aktuellsten readme.txt
+
+### Server-Version
+Die Server .zip Datei herunterladen, npm install und mit NodeJS starten (siehe readme)
 
 ### Windows 10 & 11
 PVist ist portabel, dh. es braucht keine eigentliche Installation und kann von einem beliebigen Verzeichnis sofort ausgeführt werden.
@@ -84,17 +96,16 @@ Wird das Hauptfenster geschlossen, dann wird auch der Server beendet.
 ### PVist… 
 - belegt keine Ressourcen, wenn es beendet ist
 - installiert keine Dienste, modifiziert nicht die Registry 
-- telefoniert nicht nach Hause
-- zeigt keine Werbung an
+- telefoniert nicht nach Hause, zeigt keine Werbung an
 - braucht keinerlei externen Ressourcen, auch nicht die von E3DC oder go-e
 -	wer zusätzlich eine go-e Wallbox mit aktiviertem lokalen API V2 hat, kann unter den Einstellungen deren URL eingeben.
 	Beispiele:
 	`http://go-echarger-123456.fritz.box/api/` oder	`http://192.168.x.y/api/`
 
-	Hinter dem Netzwerknamen immer “/api/” anfügen. Dann werden zusätzlich der Leistungsverlauf und die zuletzt geladene Energie der WB in Blau angezeigt. 
-	Dann wird zusätzlich ein blaues Auto-Symbol angezeigt, über das weitere Einstellung vorgenommen werden können. Dort kann das PV-Überschussladen aktiviert werden.
+	Dann werden zusätzlich der Leistungsverlauf und die zuletzt geladene Energie der WB in Blau angezeigt. 
+	Es wird zusätzlich ein blaues Auto-Symbol angezeigt, über das weitere Einstellung vorgenommen werden können. Dort kann das PV-Überschussladen aktiviert werden.
 
-- wenn die Funktion "CSV-Datei abspeichern" aktiviert wird, erzeugt das Programm für jeden Tag eine separate CSV-Datei, in der die angezeigten Werte abgelegt werden. Die CSV-Dateien werden auf dem PC abgelegt, auf dem PVist läuft (“Server”) unter
+- wenn die Funktion "CSV-Datei abspeichern" aktiviert wird, erzeugt das Programm für jeden Tag eine neu CSV-Datei, in der die angezeigten Werte abgelegt werden. Die CSV-Dateien werden auf dem PC abgelegt, auf dem PVist läuft unter
 
 	- Windows:<br/>
 	Windows-Verzeichnis für temporäre Dateien, das den symbolischen Namen "%temp%" hat (im Dateiexplorer eingegeben)
@@ -103,9 +114,8 @@ Wird das Hauptfenster geschlossen, dann wird auch der Server beendet.
 
 	Die Dateien können z.B. mit Excel, Calc, oder Numbers weiter verarbeitet werden.
 	Wenn die aktuelle Datei gesperrt wird (z.B. durch eine Tabellenkalkulation), kann PVist keine weiteren Daten hinzufügen.
-	Diese Dateien werden von PVist nicht gelöscht.
+	Diese Dateien entstehen täglich neu und werden von PVist nicht gelöscht.
 
-Enjoy!
 ## Anmerkungen
 ### Status-Icon
 - das Programm erzeugt ein Symbol im Infobereich (Windows) oder oben (Mac)
@@ -118,16 +128,20 @@ Enjoy!
 - `l` Log einblenden 
 - `<Strg>-r` Bildschirm erneuern
 - `F11` Vollbild
+- `d` Dark Mode
+- `h` Heller Mode
 
 ### Aufruf über das Netzwerk
-PVist kann 1:1 auch aus dem LAN / WLAN / Internet (per VPN) via
+PVist ist ein https-Server und kann auch aus dem LAN / WLAN / Internet (per VPN) via
 
 	https://[pcname bzw IP-Adr]:26180 
 
 mit jedem Browser aufgerufen werden. Der dann folgende, einmalige Sicherheitshinweis bzgl. eines selbst ausgestellten Zertifikats kann getrost ignoriert werden, da der Web-Server selbst betrieben wird.
+Bei Bedarf kann die Portnummer geändert werden und es können gültige Zertifikate installiert werden.
 
 ### Zeitliche Auflösung
 Die zeitliche Auflösung der Grafik kann per Menü rechts oben zwischen einer und 60 Sekunden gewählt werden, sie gilt für alle Betrachter der Grafik. Die Kurven werden nicht geglättet.
+Es sind auch Auflösungen unter einer Sekunde möglich, wenn man die Konfigurationsdatei (JSON) direkt bearbeitet.
 
 ### Zoom / Cursor
 Beliebige Zeitfenster aus der Grafik können mit der linken Maustaste markiert werden. Der gestrichelte vertikale Cursor zeigt den genauen Zeitpunkt und dessen genauen Werte an. Werden mehrere Werte angezeigt, dann gibt es mehrere Messwerte an dieser Stelle (auflösungsbedingt).
@@ -157,17 +171,18 @@ Bei einem Wechsel der Anzahl der Phasen kann es zu einigen Sekunden Unterbrechun
 
 Die Ladung des Autos wird höher als das Laden des S10-Akkus priorisiert.
 
+Es kann eine maximale Ladeenerige vorgegeben werden, wenn das Ladeende nicht durch das Auto bestimmt werden soll.
+
 ### Sicherheit
-PVist ist für den Inhouse-Gebrauch mit wohlwollenden Anwendern gedacht und bringt keine bekannten Sicherheitsprobleme mit sich. Es betreibt einen eigenen, rudimentären Webserver. 
+PVist ist für den Inhouse-Gebrauch gedacht und bringt keine bekannten Sicherheitsprobleme mit sich. Es betreibt einen eigenen, rudimentären Webserver. 
 
 Theoretisch können seine Dienste auch direkt ins Internet gestellt werden, wovon aber abzuraten ist. Dann könnte jeder beliebige Internet-Teilnehmer die Konfiguration verändern.
 
-Es spricht aber nichts dagegen, es auch von unterwegs aus über ein VPN zu verwenden. 
+Es spricht aber nichts dagegen, es auch von unterwegs via VPN zu verwenden. 
 
 Hinweise auf etwaige Schwachstellen nimmt der Autor gerne an.
 
 Das Programm nimmt keinerlei Einstellungen an der S10 vor, lediglich die Wallbox wird mit Werten und Parametern versorgt.
-
 
 ## De-Installation (???)
 ### Windows
@@ -185,14 +200,15 @@ Das Programm nimmt keinerlei Einstellungen an der S10 vor, lediglich die Wallbox
 
 1.	Warum sind hier keine Sourcen?<br/>
 	Weil ich derzeit keine Zeit habe, sie öffentlich zu pflegen. Vielleicht wird sich das zu einem späteren Zeitpunkt noch ändern.<br/>
- 	Außerdem kann man hier das Projekt gut verwalten (Issues, Readme etc)
-  	
+ 	Außerdem kann man hier das Projekt gut verwalten (Issues, Readme etc). Bei mir läuft PVist 24/7 völlig ohne Probleme und wartungsfrei.
+	  	
 1.	Ist das Malware?<br/>
-	Nein, ich verwende es selbst auch 😉. Es wäre auch eine komische Idee, Malware in JavaScript/Electron zu schreiben.
+	Nein, ich verwende es selbst auch 😉. Es wäre auch eine komische Idee, Malware in JavaScript/Electron zu schreiben. Das Javascript kann eingesehen werden.
 
 1.	Warum hast Du PVist geschrieben?<br/>
-	- weil ich die Grafiken von E3DCs Webeite zu schlecht aufgelöst und zu sehr geglättet fand
-	- weil ich Überschussladen wollte ohne neue Server zu installieren
+	- weil ich die Grafiken von E3DCs Webeite zu wenig aufgelöst und zu sehr geglättet fand
+ 	- weil ich nicht jedes mal in Keller gehen wollte, um die aktuellen Werte und Trends zu sehen
+	- weil ich Überschussladen realisieren wollte ohne dafür einen extra Server zu installieren
  	- weil ich den tatsächlichen COP meiner Wärmepumpe ermitteln wollte
 	- weil ich schon immer mal die Idee ausprobieren wollte, einen Server in Electron zu schreiben
-	- weil ich meine Daten nicht von fremden Servern abfragen will ("Digitale Souveränität")
+	- weil ich meine eigenen Daten nicht von fremden Servern abfragen will ("Digitale Souveränität")
